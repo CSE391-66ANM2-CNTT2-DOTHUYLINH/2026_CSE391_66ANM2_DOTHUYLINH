@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Form đặt hàng</title>
+
+<style>
+body{
+ font-family:Arial;
+ padding:30px;
+}
+
+form{
+ width:400px;
+}
+
+input,select,textarea{
+ width:100%;
+ padding:8px;
+ margin-top:5px;
+}
+
+textarea{
+ height:80px;
+}
+
+.error{
+ color:red;
+ font-size:13px;
+}
+
+.counter{
+ font-size:13px;
+ text-align:right;
+}
+
+.invalid{
+ border:2px solid red;
+}
+
+.valid{
+ border:2px solid green;
+}
+
+#confirmBox{
+ display:none;
+ border:1px solid #ccc;
+ padding:15px;
+ margin-top:20px;
+}
+
+button{
+ margin-top:10px;
+ padding:8px 15px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Đặt hàng</h2>
+
+<form id="orderForm">
+
+<label>Sản phẩm</label>
+<select id="product">
+<option value="">-- Chọn sản phẩm --</option>
+<option value="Áo">Áo</option>
+<option value="Quần">Quần</option>
+<option value="Giày">Giày</option>
+</select>
+<span class="error" id="productError"></span>
+
+<label>Số lượng</label>
+<input type="number" id="quantity">
+<span class="error" id="quantityError"></span>
+
+<label>Ngày giao</label>
+<input type="date" id="date">
+<span class="error" id="dateError"></span>
+
+<label>Địa chỉ giao</label>
+<input id="address">
+<span class="error" id="addressError"></span>
+
+<label>Ghi chú</label>
+<textarea id="note"></textarea>
+<div class="counter" id="counter">0/200</div>
+<span class="error" id="noteError"></span>
+
+<label>Thanh toán</label><br>
+
+<input type="radio" name="payment" value="COD"> COD
+<input type="radio" name="payment" value="Bank"> Chuyển khoản
+<input type="radio" name="payment" value="Ewallet"> Ví điện tử
+
+<span class="error" id="paymentError"></span>
+
+<div style="margin-top:10px">
+Tổng tiền: <b id="total">0</b> VNĐ
+</div>
+
+<button type="submit">Đặt hàng</button>
+
+</form>
+
+<div id="confirmBox">
+<h3>Xác nhận đơn hàng</h3>
+<div id="summary"></div>
+
+<button id="confirmBtn">Xác nhận</button>
+<button id="cancelBtn">Hủy</button>
+</div>
+
+<div id="success"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Form đăng ký nâng cấp</title>
+
+<style>
+body{
+ font-family: Arial;
+ padding:30px;
+}
+
+input{
+ width:100%;
+ padding:8px;
+ margin-top:5px;
+}
+
+.error{
+ color:red;
+ font-size:13px;
+}
+
+#nameCounter{
+ font-size:13px;
+ text-align:right;
+}
+
+#strengthBar{
+ height:6px;
+ width:0%;
+ background:#ccc;
+ margin-top:5px;
+}
+
+button{
+ margin-top:5px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Đăng ký tài khoản</h2>
+
+<form>
+
+<!-- Họ tên -->
+<label>Họ và tên</label>
+
+<input id="fullname" maxlength="50">
+
+<div id="nameCounter">0/50</div>
+
+<span class="error" id="fullnameError"></span>
+
+
+<!-- Mật khẩu -->
+<label>Mật khẩu</label>
+
+<div style="position:relative">
+
+<input type="password" id="password">
+
+<button type="button" id="togglePass"
+style="position:absolute;right:5px;top:5px">
+👁
+</button>
+
+</div>
+
+<div id="strengthBar"></div>
+
+<div id="strengthText"></div>
+
+<span class="error" id="passwordError"></span>
+
+</form>
+
+<script src="script.js"></script>
+
+</body>
+</html>

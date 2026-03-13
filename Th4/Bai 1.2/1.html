@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Bộ lọc danh sách sinh viên</title>
+
+<style>
+body{
+    font-family: Arial;
+    padding:20px;
+}
+
+input,select{
+    padding:6px;
+    margin-right:10px;
+}
+
+button{
+    padding:5px 10px;
+}
+
+table{
+    border-collapse: collapse;
+    width:700px;
+    margin-top:15px;
+}
+
+th,td{
+    border:1px solid #ccc;
+    padding:8px;
+    text-align:center;
+}
+
+th{
+    background:#eee;
+    cursor:pointer;
+}
+
+.low{
+    background:yellow;
+}
+
+#stats{
+    margin-top:10px;
+    font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Quản lý điểm sinh viên</h2>
+
+<input id="name" placeholder="Họ tên">
+<input id="score" type="number" placeholder="Điểm (0-10)">
+<button onclick="addStudent()">Thêm</button>
+
+<br><br>
+
+<input id="search" placeholder="Tìm kiếm tên">
+
+<select id="filterRank">
+<option value="all">Tất cả</option>
+<option value="Giỏi">Giỏi</option>
+<option value="Khá">Khá</option>
+<option value="Trung bình">Trung bình</option>
+<option value="Yếu">Yếu</option>
+</select>
+
+<table>
+
+<thead>
+<tr>
+<th>STT</th>
+<th>Họ tên</th>
+<th id="scoreHeader">Điểm ▲</th>
+<th>Xếp loại</th>
+<th>Thao tác</th>
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+
+</table>
+
+<div id="stats"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

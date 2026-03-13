@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Bảng điểm sinh viên</title>
+
+<style>
+body{
+    font-family: Arial;
+    padding:20px;
+}
+
+input{
+    padding:6px;
+    margin-right:10px;
+}
+
+button{
+    padding:6px 12px;
+}
+
+table{
+    border-collapse: collapse;
+    width:600px;
+    margin-top:15px;
+}
+
+th, td{
+    border:1px solid #ccc;
+    padding:8px;
+    text-align:center;
+}
+
+th{
+    background:#f2f2f2;
+}
+
+.low-score{
+    background:yellow;
+}
+
+#stats{
+    margin-top:10px;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Quản lý điểm sinh viên</h2>
+
+<input id="name" placeholder="Họ tên">
+<input id="score" type="number" placeholder="Điểm (0-10)" step="0.1">
+
+<button id="addBtn">Thêm</button>
+
+<table>
+<thead>
+<tr>
+<th>STT</th>
+<th>Họ tên</th>
+<th>Điểm</th>
+<th>Xếp loại</th>
+<th>Thao tác</th>
+</tr>
+</thead>
+
+<tbody id="tableBody">
+</tbody>
+
+</table>
+
+<div id="stats"></div>
+
+<script>
+
+let students = []
+
+const nameInput = document.getElementById("name")
+const scoreInput = document.getElementById("score")
+const tableBody = document.getElementById("tableBody")
+const stats = document.getElementById("stats")
+
+// xác định xếp loại
+function getRank(score){
+    if(score >= 8.5) return "Giỏi"
+    if(score >= 7) return "Khá"
+    if(score >= 5) return "Trung bình"
+    return "Yếu"
+}
+
+// render bảng
+function renderTable(){
+
+    tableBody.innerHTML = ""
+
+    students.forEach((sv,index)=>{
+
+        const tr = document.createElement("tr")
+
+        if(sv.score < 5){
+            tr.classList.add("low-score")
+        }
+
+        tr.innerHTML = `
+        <td>${index+1}</td>
+        <td>${sv.name}</td>
+        <td>${sv.score}</td>
+        <td>${getRank(sv.score)}</td>
+        <td>
+            <button data-index="${index}">Xóa</button>
+        </td>
+        `
+
+        tableBody.appendChild(tr)
+    })
+
+    updateStats()
+}
+
+// cập nhật thống kê
+function updateStats(){
+
+    let total = students.length
+    let avg = 0
+
+    if(total>0){
+        let sum = students.reduce((s,sv)=> s + sv.score ,0)
+        avg = (sum/total).toFixed(2)
+    }
+
+    stats.innerText = `Tổng sinh viên: ${total} | Điểm trung bình: ${avg}`
+}
+
+
+// thêm sinh viên
+function addStudent(){
+
+    const name = nameInput.value.trim()
+    const score = parseFloat(scoreInput.value)
+
+    if(name === ""){
+        alert("Họ tên không được trống")
+        return
+    }
+
+    if(isNaN(score) || score <0 || score>10){
+        alert("Điểm phải từ 0 đến 10")
+        return
+    }
+
+    students.push({
+        name: name,
+        score: score
+    })
+
+    renderTable()
+
+    nameInput.value = ""
+    scoreInput.value = ""
+    nameInput.focus()
+}
+
+document.getElementById("addBtn").onclick = addStudent
+
+
+// Enter để thêm
+scoreInput.addEventListener("keypress",function(e){
+    if(e.key === "Enter"){
+        addStudent()
+    }
+})
+
+
+// Event Delegation cho nút xóa
+tableBody.addEventListener("click",function(e){
+
+    if(e.target.tagName === "BUTTON"){
+
+        const index = e.target.dataset.index
+
+        students.splice(index,1)
+
+        renderTable()
+    }
+
+})
+
+</script>
+
+</body>
+</html>
